@@ -1,0 +1,170 @@
+body {
+    height: 100vh;
+    width: 100vw;
+
+    margin: 0 0 0 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    height: 15%;
+    width: 100%;
+    margin: 0 0 0 0;
+}
+
+main {
+    height: 70%;
+    width: 100%;
+    margin: 0 0 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    height: 100%;
+    width: 80%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.left-side {
+    height: inherit;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.logo-and-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+}
+
+.logo-and-header>img {
+    height: 80px;
+}
+
+.logo-and-header>h1 {
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 4rem;
+    font-size: 5rem;
+    text-shadow: 2px 4px 0px #FFDF01;
+    -webkit-text-stroke: 2px #FFDF01;
+
+}
+
+
+.logo-and-header>h1::after {
+    content: "\A   budget";
+    white-space: pre;
+}
+
+.left-side>p {
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+
+.description {
+    margin-top: 50px;
+    width: 80%;
+}
+
+.right-side {
+    height: inherit;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.right-side h2 {
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    font-size: 2rem;
+    -webkit-text-stroke: 2px black;
+    margin: 40px 0 0 0;
+}
+
+.log-in {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 500px;
+    padding: 0 20px 0 20px;
+}
+
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 500px;
+    padding: 0 20px 0 20px;
+}
+
+.input-table {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+}
+
+.input-field{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
+
+}
+
+.input-field > input{
+    width: 100%;
+    height: 30px;
+    margin: 0 0 0 0;
+    padding: 0 15px 0 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    
+
+}
+
+span.input-name {
+    font-family: "Rubik", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    /* font-style: normal; */
+    font-size: 0.8rem;
+
+}
+
+button{
+    margin: 0 0 30px 0;
+}
+
+footer {
+    height: 15%;
+    width: 100%;
+}
