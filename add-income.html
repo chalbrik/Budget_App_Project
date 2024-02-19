@@ -1,31 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add income</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <nav>
-          <h1>spy<br />budget</h1>
-          <div class="pie-chart-logo">
-              <div class="slice one"></div>
-              <div class="slice two"></div>
-              <!-- <div class="slice three"></div> -->
+      <nav>
+        <h1>spy<br />budget</h1>
+        <div class="pie-chart-logo">
+          <div class="slice one"></div>
+          <div class="slice two"></div>
+          <!-- <div class="slice three"></div> -->
+        </div>
+        <ul>
+          <li><a href="./add-income.html">Add income</a></li>
+          <li><a href="./add-expense.html">Add expense</a></li>
+          <li><a href="./check-balance.html">Check balance</a></li>
+          <li><a href="./settings.html">Settings</a></li>
+          <li><a href="./index.html">Log out</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="transaction-form">
+        <h2>Add income</h2>
+        <div class="input-form">
+          <div class="form-amount-date">
+            <div class="form-input">
+              <span>Amount</span>
+              <input type="text" />
             </div>
-          <ul>
-            <li><a href="./add-income.html">Add income</a></li>
-            <li><a href="./add-expense.html">Add expense</a></li>
-            <li><a href="./check-balance.html">Check balance</a></li>
-            <li><a href="./settings.html">Settings</a></li>
-            <li><a href="./index.html">Log out</a></li>
-          </ul>
-        </nav>
-      </header>
-    <main>Add income</main>
+            <div class="form-input">
+              <span>Date</span>
+              <input type="text" />
+            </div>
+          </div>
+          <fieldset class="form-input category">
+            <legend>Pick category</legend>
+
+            <div class="radio-row">
+              <div>
+                <input
+                  type="radio"
+                  id="salary"
+                  name="salary"
+                  value="salary"
+                  checked
+                />
+                <label for="salary">Salary</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  id="investments"
+                  name="investments"
+                  value="investments"
+                />
+                <label for="investments">Investments</label>
+              </div>
+            </div>
+
+            <div class="radio-row">
+              <div>
+                <input
+                  type="radio"
+                  id="bank-interest"
+                  name="bank-interest"
+                  value="bank interest"
+                />
+                <label for="bank-interest">Bank interest</label>
+              </div>
+
+              <div>
+                <input type="radio" id="sales" name="sales" value="sales" />
+                <label for="sales">Sales</label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-input-note">
+            <span>Note</span>
+            <input type="text" />
+          </div>
+          <div class="form-button-action">
+            <button>Cancel</button>
+            <button>Done</button>
+          </div>
+        </div>
+      </div>
+    </main>
     <footer></footer>
     <script src="./index.js"></script>
-</body>
+  </body>
 </html>
