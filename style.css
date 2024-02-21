@@ -58,6 +58,8 @@ header li>a {
 
 .logo {
     animation: rotate-slice 20s infinite linear;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .pie-chart-logo {
@@ -613,7 +615,7 @@ main {
         }
 
     }
-
+}
     @-webkit-keyframes rotate-slice {
         from {
             transform: rotate(0deg);
