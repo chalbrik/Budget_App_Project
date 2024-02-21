@@ -614,7 +614,7 @@ main {
 
     }
 
-    @keyframes rotate-slice {
+    @-webkit-keyframes rotate-slice {
         from {
             transform: rotate(0deg);
         }
