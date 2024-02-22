@@ -4,25 +4,70 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Check balance</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
     
   </head>
   <body>
     <header>
-      <nav>
-        <h1>spy<br />budget</h1>
-        <div class="pie-chart-logo">
-          <div class="slice one"></div>
-          <div class="slice two"></div>
-          <!-- <div class="slice three"></div> -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-bg-color custom-position">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarsExample08"
+          aria-controls="navbarsExample08"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-md-center custom-position"
+          id="navbarsExample08"
+        >
+          <ul class="navbar-nav custom-width">
+            <li class="nav-item active custom-layout-logo">
+              <img class="logo" src="./assets/pie-chart-logo.svg" alt="Logo" />
+              <a class="nav-link custom-font-logo" href="./userpage.html"
+                >spy <br />budget</span> </a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle custom-font"
+                href="#"
+                id="dropdown08"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Add</a
+              >
+              <div class="dropdown-menu dropdown-menu-custom-bg-color custom-font" aria-labelledby="dropdown08">
+                <a class="dropdown-item custom-font" href="#">Add income</a>
+                <a class="dropdown-item custom-font" href="#">Add expense</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-font" href="./check-balance.html">Check balance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-font" href="./settings.html">Settings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link custom-font" href="./index.html">Log out</a>
+            </li>
+          </ul>
         </div>
-        <ul>
-          <li><a href="./add-income.html">Add income</a></li>
-          <li><a href="./add-expense.html">Add expense</a></li>
-          <li><a href="./check-balance.html">Check balance</a></li>
-          <li><a href="./settings.html">Settings</a></li>
-          <li><a href="./index.html">Log out</a></li>
-        </ul>
       </nav>
     </header>
     <main>
@@ -103,6 +148,14 @@
       </div>
     </main>
     <footer></footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./index.js"></script>
 
   </body>

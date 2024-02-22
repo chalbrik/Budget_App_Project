@@ -78,6 +78,15 @@ background-color: white !important;
     border-color: rgb(0, 0, 0, 0);
 }
 
+.dropdown-menu-custom-position{
+padding: 40px 0 0 0;
+}
+
+.nav-item-custom-postion{
+    display: flex;
+    flex-direction: row;
+}
+
 nav {
     height: 100%;
     display: flex;
