@@ -3,15 +3,16 @@
 <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 150 150" style="enable-background:new 0 0 150 150;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#1675F2;stroke:#163BF2;stroke-width:5;stroke-miterlimit:10;}
-	.st1{fill:#F2A616;stroke:#F28D16;stroke-width:5;stroke-miterlimit:10;}
-	.st2{fill:#FF5E00;stroke:#FF2400;stroke-width:5;stroke-miterlimit:10;}
+	.st0{fill:#FF5E00;stroke:#FF2400;stroke-width:5;stroke-miterlimit:10;}
+	.st1{fill:#1675F2;stroke:#163BF2;stroke-width:5;stroke-miterlimit:10;}
+	.st2{fill:#F2A616;stroke:#F28D16;stroke-width:5;stroke-miterlimit:10;}
 </style>
 <g>
-	<path class="st0" d="M28.92,113.37C19.93,102.59,15,89.02,15,74.89c0-15.73,6.06-30.61,17.05-41.91
-		C42.21,22.55,55.6,16.21,69.97,14.99l-0.3,57.63L28.92,113.37z"/>
-	<path class="st1" d="M75.12,135.01c-14.13,0-27.7-4.93-38.48-13.92l40.74-40.74H135c-1.29,14.3-7.66,27.62-18.07,37.7
-		C105.64,128.99,90.79,135.01,75.12,135.01z"/>
-	<path class="st2" d="M80.59,69.42V15.01c13.93,1.27,27,7.4,37.01,17.4c10.01,10.01,16.13,23.07,17.4,37.01H80.59z"/>
+	<path class="st0" d="M119.64,69.67H135c-1.27-13.94-7.4-27-17.4-37.01c-10.01-10.01-23.07-16.13-37.01-17.4V30.6
+		C100.97,33.13,117.12,49.28,119.64,69.67z"/>
+	<path class="st1" d="M30,75c0-23.12,17.45-42.17,39.89-44.7l0.08-15.31c-14.37,1.22-27.76,7.56-37.92,17.99
+		C21.06,44.28,15,59.16,15,74.89c0,14.13,4.93,27.7,13.92,38.48l10.65-10.65C33.58,95.08,30,85.46,30,75z"/>
+	<path class="st2" d="M119.67,80.36C117.02,102.68,98.04,120,75,120c-10.45,0-20.06-3.57-27.7-9.55L36.65,121.1
+		c10.77,8.99,24.35,13.92,38.48,13.92c15.67,0,30.52-6.02,41.8-16.95c10.42-10.09,16.78-23.4,18.07-37.7H119.67z"/>
 </g>
 </svg>
