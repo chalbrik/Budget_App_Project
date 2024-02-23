@@ -647,15 +647,47 @@ footer {
     .sign-up {
         height: 400px;
     }
-
-    @media (max-width: 1450px) {
-
-        .right-side h2 {
-            font-size: 2.6rem;
-        }
-
-    }
 }
+
+@media (max-width: 1450px) {
+
+    .right-side h2 {
+        font-size: 2.6rem;
+    }
+
+}
+
+@media (max-width: 992px){
+/* .navbar-expand-lg {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+} */
+.incomes-expenses-charts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 5px 5px 5px;
+}
+
+.incomes-charts {
+    height: 100%;
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 5px;
+
+}
+
+.expenses-charts {
+    height: 100%;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 5px;
+}
+}
+
 
 @-webkit-keyframes rotate-slice {
     from {
