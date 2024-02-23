@@ -34,87 +34,163 @@ document.querySelectorAll(".nav-item").forEach((navItem) => {
   });
 });
 
-
 //doughnut - incomes
-const incomesCtx = document.getElementById('incomeDoughnutChart');
+const incomesCtx = document.getElementById("incomeDoughnutChart");
 
 new Chart(incomesCtx, {
-type:'doughnut',
-data:{
-  labels: [
-    'Salary',
-    'Bank interest',
-    'Sales',
-    'Investments',
-    'Other'
-  ],
-  datasets: [{
-    label: 'Incomes',
-    data: [4200, 580, 310, 308, 97],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)',
-      'rgb(255, 88, 86)',
-      'rgb(255, 115, 26)'
+  type: "doughnut",
+  data: {
+    labels: ["Salary", "Bank interest", "Sales", "Investments", "Other"],
+    datasets: [
+      {
+        label: "Incomes",
+        data: [4200, 580, 310, 308, 97],
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+          "rgb(255, 88, 86)",
+          "rgb(255, 115, 26)",
+        ],
+        hoverOffset: 4,
+      },
     ],
-    hoverOffset: 4
-  }]
-},
-options: {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: 'right',
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "right",
+      },
+      title: {
+        display: false,
+        text: "Chart.js Doughnut Chart",
+      },
     },
-    title: {
-      display: false,
-      text: 'Chart.js Doughnut Chart'
-    }
-  }
-},
-
+  },
 });
 
-//doughnut - incomes
-const expensesCtx = document.getElementById('expensesDoughnutChart');
+//doughnut - expenses
+const expensesCtx = document.getElementById("expensesDoughnutChart");
 
 new Chart(expensesCtx, {
-type:'doughnut',
-data:{
-  labels: [
-    'Salary',
-    'Bank interest',
-    'Sales',
-    'Investments',
-    'Other'
-  ],
-  datasets: [{
-    label: 'Expenses',
-    data: [2250, 340, 270, 102, 43],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)',
-      'rgb(255, 88, 86)',
-      'rgb(255, 115, 26)'
+  type: "doughnut",
+  data: {
+    labels: [
+      "Food",
+      "Apartment",
+      "Transport",
+      "Media",
+      "Healthcare",
+      "Hygiene",
+      "Entertainment",
+      "Trips",
+      "Training",
+      "Debt",
     ],
-    hoverOffset: 4
-  }]
-},
-options: {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: 'right',
+    datasets: [
+      {
+        label: "Expenses",
+        data: [2250, 1340, 570, 402, 143, 130, 60, 54, 42, 23],
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+          "rgb(255, 88, 86)",
+          "rgb(255, 115, 26)",
+          "rgb(75, 192, 192)",
+          "rgb(153, 102, 255)",
+          "rgb(255, 159, 64)",
+          "rgb(201, 203, 207)",
+          "rgb(54, 235, 183)",
+        ],
+        hoverOffset: 4,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "right",
+      },
+      title: {
+        display: false,
+        text: "Chart.js Doughnut Chart",
+      },
     },
-    title: {
-      display: false,
-      text: 'Chart.js Doughnut Chart'
-    }
-  }
-},
+  },
+});
 
+//line - bilans
+const bilansCtx = document.getElementById("bilansLineChart");
+
+new Chart(bilansCtx, {
+  type: "line",
+  data: {
+    labels: [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun",
+    ],
+    datasets: [
+      {
+        label: "Money",
+        data: [
+          1259, 1242, 1226, 1211, 1197, 1184, 1171, 1160, 1149, 1139, 1133,
+          1122, 1115, 1106, 1099, 1090, 1086, 1080, 1075, 1070, 1065, 1061,
+          1057, 1053, 1049, 1046, 1043, 1040,
+        ],
+        fill: false,
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.1,
+      },
+      {
+        label: "Expenses",
+        data: [
+          27, 207, 209, 271, 185, 274, 134, 274, 186, 70, 102, 242, 136, 22,
+          210, 184, 202, 228, 273, 26, 266, 263, 225, 243, 93, 208, 148, 163,
+        ],
+        fill: false,
+        borderColor: "rgb(255, 99, 132)",
+        tension: 0.1,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
 });

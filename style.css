@@ -168,7 +168,7 @@ main {
     align-items: center;
 }
 
-main.check-balance-page{
+main.check-balance-page {
     height: auto;
 }
 
@@ -556,12 +556,12 @@ main {
 
 }
 
-.incomes-doughnut-chart{
+.incomes-doughnut-chart {
     height: 300px !important;
     width: 300px !important;
 }
 
-.chart-name{
+.chart-name {
     font-family: "Rubik Mono One", monospace;
     font-weight: 400;
     font-style: normal;
@@ -573,7 +573,7 @@ main {
     font-size: 35px;
 }
 
-.chart-sum-value{
+.chart-sum-value {
     font-family: "Rubik Mono One", monospace;
     font-weight: 400;
     font-style: normal;
@@ -603,6 +603,11 @@ main {
     width: 100%;
     border: 1px solid black;
     margin: 5px 5px 5px 5px;
+}
+
+.bilans-line-chart {
+    width: 100% !important;
+    height: auto !important;
 }
 
 .card-body {
@@ -664,37 +669,46 @@ footer {
 
 @keyframes noise {
     0% {
-      background-position: 0 0;
+        background-position: 0 0;
     }
+
     10% {
-      background-position: -5% -10%;
+        background-position: -5% -10%;
     }
+
     20% {
-      background-position: -10% 5%;
+        background-position: -10% 5%;
     }
+
     30% {
-      background-position: 5% -5%;
+        background-position: 5% -5%;
     }
+
     40% {
-      background-position: -5% 10%;
+        background-position: -5% 10%;
     }
+
     50% {
-      background-position: 5% 5%;
+        background-position: 5% 5%;
     }
+
     60% {
-      background-position: 10% 0;
+        background-position: 10% 0;
     }
+
     70% {
-      background-position: 5% 10%;
+        background-position: 5% 10%;
     }
+
     80% {
-      background-position: -10% 5%;
+        background-position: -10% 5%;
     }
+
     90% {
-      background-position: 10% 10%;
+        background-position: 10% 10%;
     }
+
     100% {
-      background-position: 0 0;
+        background-position: 0 0;
     }
-  }
-  
+}
