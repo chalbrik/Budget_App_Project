@@ -42,29 +42,34 @@
                 >spy <br />budget</span> </a
               >
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown nav-item-custom-postion">
+              <img id="add" class="nav-icon" src="./assets/plus-lg.svg" alt="Add" />
               <a
-                class="nav-link dropdown-toggle custom-font"
+                class="nav-link dropdown-toggle custom-font nav-name-add"
                 href="#"
                 id="dropdown08"
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                hidden
                 >Add</a
               >
-              <div class="dropdown-menu dropdown-menu-custom-bg-color custom-font" aria-labelledby="dropdown08">
-                <a class="dropdown-item custom-font" href="#">Add income</a>
-                <a class="dropdown-item custom-font" href="#">Add expense</a>
+              <div class="dropdown-menu dropdown-menu-custom-bg-color dropdown-menu-custom-position custom-font" aria-labelledby="dropdown08">
+                <a class="dropdown-item custom-font" href="./add-income.html">Add income</a>
+                <a class="dropdown-item custom-font" href="./add-expense.html">Add expense</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link custom-font" href="./check-balance.html">Check balance</a>
+            <li class="nav-item nav-item-custom-postion">
+              <img id="check-balance" class="nav-icon" src="./assets/graph-up-arrow.svg" alt="Check balance" />
+              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Check balance</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link custom-font" href="./settings.html">Settings</a>
+            <li class="nav-item nav-item-custom-postion">
+              <img id="settings" class="nav-icon" src="./assets/gear.svg" alt="Settings" />
+              <a class="nav-link custom-font nav-name-settings" href="./settings.html" hidden>Settings</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link custom-font" href="./index.html">Log out</a>
+            <li class="nav-item nav-item-custom-postion">
+              <img id="log-out" class="nav-icon" src="./assets/box-arrow-right.svg" alt="Log out" />
+              <a class="nav-link custom-font nav-name-log-out" href="./index.html" hidden>Log out</a>
             </li>
           </ul>
         </div>
