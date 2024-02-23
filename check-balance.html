@@ -75,7 +75,7 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main class="check-balance-page">
       <div class="check-balance-main-container">
         <div class="period-for-data">
           <span>Select desired period for data</span>
@@ -86,73 +86,32 @@
             <option value="custom date">Custom date</option>
           </select>
         </div>
+
         <div class="incomes-expenses-charts">
           <div class="incomes-charts">
-            <div class="bar-charts-all">
-                <div class="bar-chart">
-                <div class="bar"></div>
-                <span>Salary</span>
+            <div class="chart-name">Incomes</div>
+            <div class="chart">
+              <canvas id="incomeDoughnutChart" class="incomes-doughnut-chart"></canvas>
             </div>
-            <div class="bar-chart">
-                <div class="bar"></div>
-                <span>Bank interst</span>
-            </div>
-            <div class="bar-chart">
-                <div class="bar"></div>
-                <span>Sales</span>
-            </div>
-            <div class="bar-chart">
-                <div class="bar"></div>
-                <span>Investments</span>
-            </div>
-            <div class="bar-chart">
-                <div class="bar"></div>
-                <span>Other</span>
-            </div>
-            </div>
-            
+            <div class="chart-sum-value">6200 pln</div>
           </div>
           <div class="expenses-charts">
-            <div class="bar-charts-all">
-              <div class="bar-chart">
-              <div class="bar"></div>
-              <span>Food</span>
-          </div>
-          <div class="bar-chart">
-              <div class="bar"></div>
-              <span>Apartment</span>
-          </div>
-          <div class="bar-chart">
-              <div class="bar"></div>
-              <span>Transport</span>
-          </div>
-          <div class="bar-chart">
-              <div class="bar"></div>
-              <span>Media</span>
-          </div>
-          <div class="bar-chart">
-              <div class="bar"></div>
-              <span>Healthcare</span>
-          </div>
-          </div>
-           
-             
-      </div>
-              
-              
-            
-         
-        </div>
-        <div class="bilans-chart">
-            
-            
-
-
+            <div class="chart-name">Expenses</div>
+            <div class="chart">
+              <canvas id="expensesDoughnutChart" class="expenses-doughnut-chart"></canvas>
             </div>
+            <div class="chart-sum-value">3400 pln</div>
+          </div>
+          </div>
+          <div class="bilans-chart"></div>
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -161,6 +120,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./index.js"></script>
 
   </body>
