@@ -859,6 +859,17 @@ fieldset.category legend {
     main.user-page {
         height: 75vh;
     }
+    .form-amount-date {
+        flex-direction: column;
+    }
+
+    .form-input {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0 10px 0;
+    }
+    
 }
 
 @media (max-width: 435px) {
@@ -952,6 +963,17 @@ fieldset.category legend {
 
     header {
         width: 95%;
+    }
+
+    .form-amount-date {
+        flex-direction: column;
+    }
+
+    .form-input {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0 10px 0;
     }
     
 }
