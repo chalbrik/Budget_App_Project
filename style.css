@@ -949,6 +949,11 @@ fieldset.category legend {
     .custom-layout-logo{
         display: none;
     }
+
+    header {
+        width: 95%;
+    }
+    
 }
 
 
