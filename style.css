@@ -19,6 +19,10 @@ header {
     border-bottom: 1px solid black;
 }
 
+.navbar-toggler-custom-color{
+    background-color: #1675F2;
+}
+
 .custom-width {
     width: 100%;
 }
@@ -282,7 +286,7 @@ main.check-balance-page {
 }
 
 .right-side h2.log-in-title {
-    -webkit-text-stroke: 2px black;
+    -webkit-text-stroke: 2px rgb(0, 0, 0, 0.5);
 }
 
 .right-side h2.log-in-title:hover {
@@ -290,7 +294,7 @@ main.check-balance-page {
 }
 
 .right-side h2.sign-up-title {
-    -webkit-text-stroke: 2px black;
+    -webkit-text-stroke: 2px rgb(0, 0, 0, 0.5);
 }
 
 .right-side h2.sign-up-title:hover {
@@ -786,10 +790,16 @@ footer {
 
 @media (max-width: 992px) {
 
-    /* .navbar-expand-lg {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-} */
+    .custom-position{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: end !important;
+    width: 100% !important;
+    padding: 0 0 0 0 !important;
+}
+    }
+
+
     .incomes-expenses-charts {
         width: 100%;
         height: 100%;
