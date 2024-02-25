@@ -93,7 +93,6 @@ header {
     align-items: center;
     width: 170px;
     height: 50px;
-    /* background-color: #F2A616; */
 }
 
 .nav-icon {
@@ -117,7 +116,6 @@ header>nav>h1 {
     font-size: 2rem;
     text-shadow: 2px 4px 0px #FF5E00;
     -webkit-text-stroke: 2px #FF5E00;
-
 }
 
 header ul {
@@ -187,10 +185,7 @@ header ul {
     margin: 0 0 10px 0;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> main-page
 main {
     height: 75vh;
     width: 100%;
@@ -246,14 +241,10 @@ main.check-balance-page {
     font-style: normal;
     line-height: 4rem;
     font-size: 4rem;
-
     color: rgb(255, 255, 255);
     text-shadow: 2px 4px 0px #FF5E00;
-    -webkit-text-stroke: 2px #FF5E00;
-    background-image: url(https://assets-global.website-files.com/641020f6523ba60d642cb5e5/64a5f3a7cbc6412be24ed066_08-noise.png);
-    animation: 0.8s infinite noise;
-    -webkit-background-clip: text;
-    
+    -webkit-text-stroke: 2px #FF5E00;  
+    margin: 3rem 2rem 3rem 2rem;  
 }
 
 .logo-and-header>h1::before {

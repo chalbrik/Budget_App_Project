@@ -1,4 +1,3 @@
-
 //rozwijaj pełną nazwę linków w navbarze
 document.querySelectorAll(".nav-item").forEach((navItem) => {
   navItem.addEventListener("mouseover", () => {
