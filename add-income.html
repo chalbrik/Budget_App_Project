@@ -81,67 +81,67 @@
           <div class="form-amount-date">
             <div class="form-input">
               <span>Amount</span>
-              <input type="text" />
+              <div class="amount-input-currency"><input class="amount-input" type="text" />
+                <span class="currency">pln</span></div>
             </div>
             <div class="form-input">
               <span>Date</span>
-              <input type="text" />
+              <input class="date-input" type="date" id="start" name="trip-start" value="" min="" max="" />
+              
             </div>
           </div>
+          
           <fieldset class="form-input category">
             <legend>Pick category</legend>
 
             <div class="radio-row">
-              <div>
-                <input
-                  type="radio"
-                  id="salary"
-                  name="salary"
-                  value="salary"
-                  checked
-                />
-                <label for="salary">Salary</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="salary" id="salary" checked>
+                <label class="form-check-label" for="salary">
+                  Salary
+                </label>
               </div>
-              <div>
-                <input
-                  type="radio"
-                  id="investments"
-                  name="investments"
-                  value="investments"
-                />
-                <label for="investments">Investments</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="investments" id="investments">
+                <label class="form-check-label" for="investments">
+                  Investments
+                </label>
               </div>
             </div>
 
             <div class="radio-row">
-              <div>
-                <input
-                  type="radio"
-                  id="bank-interest"
-                  name="bank-interest"
-                  value="bank interest"
-                />
-                <label for="bank-interest">Bank interest</label>
-              </div>
+            
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="bank-interest" id="bank-interest">
+                  <label class="form-check-label" for="bank-interest">
+                    Bank interest
+                  </label>
+                </div>
 
-              <div>
-                <input type="radio" id="sales" name="sales" value="sales" />
-                <label for="sales">Sales</label>
-              </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="sales" id="sales">
+                  <label class="form-check-label" for="sales">
+                    Sales
+                  </label>
+                </div>
             </div>
           </fieldset>
           <div class="form-input-note">
             <span>Note</span>
-            <input type="text" />
+            <textarea class="form-control" aria-label="With textarea"></textarea>
           </div>
           <div class="form-button-action">
-            <button>Cancel</button>
-            <button>Done</button>
+            <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
+            <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button>Done</button></div>
           </div>
         </div>
       </div>
     </main>
-    <footer></footer>
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -151,5 +151,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="./index.js"></script>
+    <script src="./setCalendar.js"></script>
   </body>
 </html>

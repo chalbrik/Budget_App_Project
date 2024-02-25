@@ -81,62 +81,94 @@
             <div class="form-amount-date">
               <div class="form-input">
                 <span>Amount</span>
-                <input type="text" />
+                <div class="amount-input-currency"><input class="amount-input" type="text" />
+                  <span class="currency">pln</span></div>
               </div>
               <div class="form-input">
                 <span>Date</span>
-                <input type="text" />
+                <input class="date-input" type="date" id="start" name="trip-start" value="" min="" max="" />
               </div>
             </div>
+            
             <fieldset class="form-input category">
               <legend>Pick category</legend>
   
               <div class="radio-row">
-                <div>
-                  <input
-                    type="radio"
-                    id="food"
-                    name="food"
-                    value="food"
-                    checked
-                  />
-                  <label for="food">Food</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="food" id="food" checked>
+                  <label class="form-check-label" for="food">
+                    Food
+                  </label>
                 </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="apartment"
-                    name="apartment"
-                    value="apartment"
-                  />
-                  <label for="apartment">Apartment</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="apartmment" id="apartmment">
+                  <label class="form-check-label" for="apartmment">
+                    Apartmment
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="hygine" id="hygine">
+                  <label class="form-check-label" for="hygine">
+                    Hygine
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="savings" id="savings">
+                  <label class="form-check-label" for="savings">
+                    Savings
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="training" id="training">
+                  <label class="form-check-label" for="training">
+                    Training
+                  </label>
                 </div>
               </div>
   
               <div class="radio-row">
-                <div>
-                  <input
-                    type="radio"
-                    id="transport"
-                    name="transport"
-                    value="transport"
-                  />
-                  <label for="transport">Transport</label>
-                </div>
+                
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="media" id="media">
+                    <label class="form-check-label" for="media">
+                      Media
+                    </label>
+                  </div>
   
-                <div>
-                  <input type="radio" id="media" name="media" value="media" />
-                  <label for="media">Media</label>
-                </div>
-              </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="healthcare" id="healthcare">
+                    <label class="form-check-label" for="healthcare">
+                      Healthcare
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="entertainment" id="entertainment">
+                    <label class="form-check-label" for="entertainment">
+                      Entertainment
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="trips" id="trips">
+                    <label class="form-check-label" for="trips">
+                      Trips
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="debt" id="debt">
+                    <label class="form-check-label" for="debt">
+                      Debt
+                    </label>
+                  </div>
+                  </div>
+
             </fieldset>
             <div class="form-input-note">
               <span>Note</span>
-              <input type="text" />
+              <textarea class="form-control" aria-label="With textarea"></textarea>
             </div>
             <div class="form-button-action">
-              <button>Cancel</button>
-              <button>Done</button>
+              <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
+              <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button>Done</button></div>
             </div>
           </div>
         </div>
@@ -151,5 +183,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="index.js"></script>
+    <script src="./setCalendar.js"></script>
 </body>
 </html>

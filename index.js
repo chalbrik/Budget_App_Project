@@ -1,36 +1,19 @@
-const incomesData = [
-  {
-    category: "Salary",
-    amount: 17.45,
-  },
-  {
-    category: "Bank interest",
-    amount: 34.91,
-  },
-  {
-    category: "Sales",
-    amount: 52.36,
-  },
-  {
-    category: "Investments",
-    amount: 31.07,
-  },
-  {
-    category: "Others",
-    amount: 23.39,
-  },
-];
 
 //rozwijaj pełną nazwę linków w navbarze
 document.querySelectorAll(".nav-item").forEach((navItem) => {
   navItem.addEventListener("mouseover", () => {
     navItem.querySelector("img.nav-icon").nextElementSibling.hidden = false;
+    navItem.querySelector("img.nav-icon").classList.add("animate-move-left");
+    navItem.querySelector("img.nav-icon").nextElementSibling.classList.add("animate-move-right");
+
   });
 });
 
 document.querySelectorAll(".nav-item").forEach((navItem) => {
   navItem.addEventListener("mouseout", () => {
     navItem.querySelector("img.nav-icon").nextElementSibling.hidden = true;
+    navItem.querySelector("img.nav-icon").classList.remove("animate-move-left");
+    navItem.querySelector("img.nav-icon").nextElementSibling.classList.remove("animate-move-right");
   });
 });
 
