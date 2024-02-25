@@ -29,6 +29,13 @@ header {
     height: 50px;
 }
 
+.navbar-collapse-custom-background{
+    background-color: white !important;
+    background: url(https://assets-global.website-files.com/641020f6523ba60d642cb5e5/64a5f3a7cbc6412be24ed066_08-noise.png);
+    animation: 0.8s infinite noise;
+    border: 1px solid black;
+}
+
 .custom-width {
     width: 100%;
 }
