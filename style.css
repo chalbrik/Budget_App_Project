@@ -19,8 +19,9 @@ header {
     border-bottom: 1px solid black;
 }
 
-.navbar-toggler-custom-color {
+.navbar-toggler-custom {
     background-color: #1675F2;
+    width: 50px;
 }
 
 .custom-width {
@@ -834,6 +835,18 @@ fieldset.category legend {
         margin-left: 0px;
         margin-top: 5px;
     }
+
+    .collapse:not(.show) {
+        display: none !important;
+    }
+
+    .custom-layout-logo{
+        display: none;
+    }
+
+    main.user-page {
+        height: 75vh;
+    }
 }
 
 @media (max-width: 435px) {
@@ -841,7 +854,10 @@ fieldset.category legend {
     main {
         height: 100%;
         width: 95%;
+    }
 
+    main.user-page {
+        height: 75vh;
     }
 
     .log-in-sign-up-main-container {
@@ -912,6 +928,14 @@ fieldset.category legend {
 
     .sign-up {
         height: 100%;
+    }
+
+    .collapse:not(.show) {
+        display: none !important;
+    }
+
+    .custom-layout-logo{
+        display: none;
     }
 }
 
