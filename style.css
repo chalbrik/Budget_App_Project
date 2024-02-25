@@ -778,7 +778,7 @@ fieldset.category legend {
 
 
 
-@media (max-height: 700px) {
+@media (max-height: 800px) {
 
     .right-side h2 {
         font-size: 2.6rem;
