@@ -243,8 +243,8 @@ main.check-balance-page {
     font-size: 4rem;
     color: rgb(255, 255, 255);
     text-shadow: 2px 4px 0px #FF5E00;
-    -webkit-text-stroke: 2px #FF5E00;  
-    margin: 3rem 2rem 3rem 2rem;  
+    -webkit-text-stroke: 2px #FF5E00;
+    margin: 3rem 2rem 3rem 2rem;
 }
 
 .logo-and-header>h1::before {
@@ -282,11 +282,19 @@ main.check-balance-page {
 }
 
 .right-side h2.log-in-title {
-    -webkit-text-stroke: 3px #F2A616;
+    -webkit-text-stroke: 2px black;
+}
+
+.right-side h2.log-in-title:hover {
+    -webkit-text-stroke: 2px #F2A616;
 }
 
 .right-side h2.sign-up-title {
-    -webkit-text-stroke: 3px #1675F2;
+    -webkit-text-stroke: 2px black;
+}
+
+.right-side h2.sign-up-title:hover {
+    -webkit-text-stroke: 2px #1675F2;
 }
 
 .box {
@@ -377,18 +385,34 @@ button {
 }
 
 button.log-in-button {
-    background-color: white;
+    background-color: rgb(22, 117, 242, 0.8);
     border: 2px solid rgb(22, 117, 242);
     border-radius: 10px;
-    color: rgb(22, 117, 242);
+    color: rgb(255, 255, 255);
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-size: 1rem;
 }
 
+button.log-in-button:hover {
+    background-color: rgb(22, 117, 242);
+    cursor: pointer;
+}
+
+.button-form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
 button.sign-up-button {
     background-color: #FF5E00;
+    order: 2px solid #FF5E00;
+    border-radius: 10px;
     border: none;
     border-radius: 10px;
     color: white;
@@ -399,17 +423,14 @@ button.sign-up-button {
 }
 
 
-button.sign-up-button {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+button.sign-up-button:hover {
+    cursor: pointer;
 }
 
 .transaction-form {
-    /* max-height: 500px; */
     height: 95%;
     width: 100%;
-    /* background-color: #1675F2; */
-    /* border-radius: 15px; */
+
     border: 1px solid black;
     margin: 10px 10px 10px 10px;
 
