@@ -744,16 +744,27 @@ fieldset.category legend {
 }
 
 
-.footer-custom-font {
+.footer {
     border-top: 1px solid black;
     height: 80px;
     width: 80%;
     margin: auto;
+}
+
+.footer-custom-font div {
+   display: flex;
+   flex-direction: row;
+   justify-content:center ;
+   align-items: center;
+   margin-top: 10px;
+}
+
+.footer-custom-font span {
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 
@@ -830,7 +841,7 @@ fieldset.category legend {
     main {
         height: 100%;
         width: 95%;
-        
+
     }
 
     .log-in-sign-up-main-container {
@@ -864,7 +875,7 @@ fieldset.category legend {
         height: 70px;
     }
 
-    .description{
+    .description {
         display: none;
     }
 
@@ -896,12 +907,12 @@ fieldset.category legend {
     }
 
     .log-in {
-    height: 100%;
-}
+        height: 100%;
+    }
 
-.sign-up {
-    height: 100%;
-}
+    .sign-up {
+        height: 100%;
+    }
 }
 
 
