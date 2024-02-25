@@ -19,7 +19,7 @@ header {
     border-bottom: 1px solid black;
 }
 
-.navbar-toggler-custom-color{
+.navbar-toggler-custom-color {
     background-color: #1675F2;
 }
 
@@ -790,41 +790,51 @@ footer {
 
 @media (max-width: 992px) {
 
-    .custom-position{
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: end !important;
-    width: 100% !important;
-    padding: 0 0 0 0 !important;
-}
-.incomes-expenses-charts {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 5px 5px 5px;
-}
-
-.incomes-charts {
-    height: 100%;
-    width: 100%;
-    margin-right: 0px;
-    margin-bottom: 5px;
-
-}
-
-.expenses-charts {
-    height: 100%;
-    width: 100%;
-    margin-left: 0px;
-    margin-top: 5px;
-}
+    .custom-position {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: end !important;
+        width: 100% !important;
+        padding: 0 0 0 0 !important;
     }
 
+    .incomes-expenses-charts {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 5px 5px 5px;
+    }
 
-   
+    .incomes-charts {
+        height: 100%;
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 5px;
+
+    }
+
+    .expenses-charts {
+        height: 100%;
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 435px) {
+
+    .log-in-sign-up-main-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
 
 
 
