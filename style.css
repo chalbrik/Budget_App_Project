@@ -75,6 +75,12 @@ header {
     -webkit-text-stroke: 2px #FF5E00;
 }
 
+.custom-font-logo:hover {
+
+    color: rgb(0, 0, 0);
+   
+}
+
 .custom-layout-logo {
     display: flex;
     flex-direction: row;
