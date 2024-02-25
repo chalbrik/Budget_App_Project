@@ -824,10 +824,10 @@ footer {
         margin-left: 0px;
         margin-top: 5px;
     }
-}
 
 
-@-webkit-keyframes rotate-slice {
+
+@keyframes rotate-slice {
     from {
         transform: rotate(0deg);
     }
