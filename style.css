@@ -668,7 +668,7 @@ main {
     width: 100%;
     height: 450px;
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: space-between;
     margin: 5px 5px 5px 5px;
 }
@@ -797,33 +797,34 @@ footer {
     width: 100% !important;
     padding: 0 0 0 0 !important;
 }
+.incomes-expenses-charts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 5px 5px 5px;
+}
+
+.incomes-charts {
+    height: 100%;
+    width: 100%;
+    margin-right: 0px;
+    margin-bottom: 5px;
+
+}
+
+.expenses-charts {
+    height: 100%;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 5px;
+}
     }
 
 
-    .incomes-expenses-charts {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        margin: 5px 5px 5px 5px;
-    }
-
-    .incomes-charts {
-        height: 100%;
-        width: 100%;
-        margin-right: 0px;
-        margin-bottom: 5px;
-
-    }
-
-    .expenses-charts {
-        height: 100%;
-        width: 100%;
-        margin-left: 0px;
-        margin-top: 5px;
-    }
+   
 
 
 
