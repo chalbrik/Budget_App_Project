@@ -176,3 +176,7 @@ new Chart(bilansCtx, {
     },
   },
 });
+
+
+// Napisz tutaj funkcję, która dodaje klasę do inputa, który nie został wypełniony
+

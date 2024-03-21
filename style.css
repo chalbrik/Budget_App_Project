@@ -380,8 +380,10 @@ main.check-balance-page {
     padding: 0 15px 0 15px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-
-
+}
+/* This is class witch is added when input field is not filled with data */
+.input-field>input.not-filled {
+    border: 2px solid hsl(0, 100%, 74%) !important;
 }
 
 span.input-name {
