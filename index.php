@@ -1,3 +1,9 @@
+<?php
+
+require_once 'database.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -59,25 +65,27 @@
 
           <div class="sign-up">
             <h2 class="sign-up-title">Sign up</h2>
-            <div class="input-table">
-              <div class="input-field">
+
+            <form action="./registered.php" method="post" class="input-table">
+            <div class="input-field">
                 <span class="input-name">Name</span>
-                <input type="text" />
+                <input type="text" name="username"/>
               </div>
               <div class="input-field">
                 <span class="input-name">E-mail address</span>
-                <input type="text" />
+                <input type="text" name="email"/>
               </div>
               <div class="input-field">
                 <span class="input-name">Password</span>
-                <input type="text" />
+                <input type="text" name="password"/>
               </div>
               <div class="input-field">
-                <span class="input-name">Repeat password</span>
+                <span class="input-name" name="password-repeat">Repeat password</span>
                 <input type="text" />
               </div>
-            </div>
-            <button class="sign-up-button">Register</button>
+              <button class="sign-up-button" type="submit">Register</button>
+            </form>
+
           </div>
           </div>
         </div>
