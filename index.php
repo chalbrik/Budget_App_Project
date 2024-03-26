@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'database.php';
 
 ?>
@@ -58,6 +60,8 @@ require_once 'database.php';
                 <input type="text" />
               </div>
             </div>
+
+            <form action="./login.php" method="post"></form>
             <a class="button-form" href="./userpage.html"><button class="log-in-button">Log in</button></a>
           </div>
           </div>
@@ -69,19 +73,37 @@ require_once 'database.php';
             <form action="./registered.php" method="post" class="input-table">
             <div class="input-field">
                 <span class="input-name">Name</span>
-                <input type="text" name="username"/>
+                <input type="text" name="username" value="<?php if(isset($_SESSION['remember_username'])){
+                  echo $_SESSION['remember_username'];
+                  unset($_SESSION['remember_username']);
+                } ?>"/>
+                <?php if(isset($_SESSION['e_username'])){
+                  echo '<span class="input-name" style="color:#FF5E00;margin-top:5px;font-size:0.65rem">'.$_SESSION['e_username'].'</span>';
+                  unset($_SESSION['e_username']);
+                } ?>
               </div>
               <div class="input-field">
                 <span class="input-name">E-mail address</span>
-                <input type="text" name="email"/>
+                <input type="text" name="email" value="<?php if(isset($_SESSION['remember_email'])){
+                  echo $_SESSION['remember_email'];
+                  unset($_SESSION['remember_email']);
+                } ?>"/>
+                <?php if(isset($_SESSION['e_email'])){
+                  echo '<span class="input-name" style="color:#FF5E00;margin-top:5px;font-size:0.65rem">'.$_SESSION['e_email'].'</span>';
+                  unset($_SESSION['e_email']);
+                } ?>
               </div>
               <div class="input-field">
                 <span class="input-name">Password</span>
                 <input type="text" name="password"/>
               </div>
               <div class="input-field">
-                <span class="input-name" name="password-repeat">Repeat password</span>
-                <input type="text" />
+                <span class="input-name">Repeat password</span>
+                <input type="text" name="password-repeat"/>
+                <?php if(isset($_SESSION['e_password'])){
+                  echo '<span class="input-name" style="color:#FF5E00;margin-top:5px;font-size:0.65rem">'.$_SESSION['e_password'].'</span>';
+                  unset($_SESSION['e_password']);
+                } ?>
               </div>
               <button class="sign-up-button" type="submit">Register</button>
             </form>
