@@ -59,8 +59,36 @@ if(isset($_POST['email'])){
     $query->bindValue(':password', $password, PDO::PARAM_STR);
     $query->bindValue(':address_email', $email, PDO::PARAM_STR);
     $query->execute();
-    
-    header("Location: index.php");//mógłbym tutaj dać przekierowanie do strony która mówi że zostałeś zarejestrowany 
+
+    //trzeba jeszcze pobrać id
+
+    $getIdQuery = $db->prepare('SELECT user_id FROM user_data WHERE address_email = :address_email');
+    $getIdQuery->bindValue(':address_email', $email, PDO::PARAM_STR);
+    $getIdQuery->execute();
+
+    $getIdQueryData = $getIdQuery->fetch();
+    $queryDataUserId = $getIdQueryData['user_id'];
+
+    //umieszczanie domyślnych kategorii wydatków i przychodów w tabeli w momencie rejestracji nowego używkownika
+    $setAutoIncrementCorrectly = $db->prepare('ALTER TABLE incomes_category_assigned_to_users AUTO_INCREMENT = 1');
+    $setAutoIncrementCorrectly->execute();
+
+    $insertDefaultCategoriesQuery = $db->prepare('INSERT INTO incomes_category_assigned_to_users(income_category_assigned_to_user_id, user_id, income_category_name)
+     SELECT NULL, :userId, income_category_name
+     FROM incomes_category_default');
+     $insertDefaultCategoriesQuery->bindValue(':userId', $queryDataUserId, PDO::PARAM_INT);
+     $insertDefaultCategoriesQuery->execute();
+
+    $setAutoIncrementCorrectly = $db->prepare('ALTER TABLE expenses_category_assigned_to_users AUTO_INCREMENT = 1');
+    $setAutoIncrementCorrectly->execute();
+
+    $insertDefaultCategoriesQuery = $db->prepare('INSERT INTO expenses_category_assigned_to_users(expense_category_assigned_to_user_id, user_id, expense_category_name)
+     SELECT NULL, :userId, expense_category_name
+     FROM expenses_category_default');
+     $insertDefaultCategoriesQuery->bindValue(':userId', $queryDataUserId, PDO::PARAM_INT);
+     $insertDefaultCategoriesQuery->execute();
+
+    header("Location: registered.html");
     exit();
 
     } else {

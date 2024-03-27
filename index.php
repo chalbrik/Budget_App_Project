@@ -75,7 +75,7 @@ require_once 'database.php';
             <div class="sign-up">
             <h2 class="sign-up-title">Sign up</h2>
 
-            <form action="./registered.php" method="post" class="input-table">
+            <form action="./register.php" method="post" class="input-table">
             <div class="input-field">
                 <span class="input-name">Name</span>
                 <input type="text" name="username" value="<?php if(isset($_SESSION['remember_username'])){

@@ -115,7 +115,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
           <div class="form-amount-date">
             <div class="form-input">
               <span>Amount</span>
-              <div class="amount-input-currency"><input class="amount-input" type="text" />
+              <div class="amount-input-currency"><input class="amount-input" type="text" name="amount"/>
                 <span class="currency">pln</span></div>
             </div>
             <div class="form-input">
@@ -162,11 +162,11 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
           </fieldset>
           <div class="form-input-note">
             <span>Note</span>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <textarea class="form-control" name="note" aria-label="With textarea"></textarea>
           </div>
           <div class="form-button-action">
             <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
-            <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button>Done</button></div>
+            <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button type="submit">Done</button></div>
           </div>
         </form>
 
