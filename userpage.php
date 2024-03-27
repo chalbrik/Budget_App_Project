@@ -1,9 +1,46 @@
+<?php
+
+session_start();
+require_once "database.php";
+
+//pobierz dane użytkownika o danej sesyjnej
+
+if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
+
+  $logged_user_id = $_SESSION['logged_id'];
+  $logged_user_name = $_SESSION['logged_name'];
+
+  $loggedUserIncomesDataQuery = $db->prepare('SELECT * FROM incomes WHERE user_id = :logged_user_id');
+  $loggedUserIncomesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $loggedUserIncomesDataQuery->execute();
+
+  $incomesData = $loggedUserIncomesDataQuery->fetch();
+
+  $loggedUserExpensesDataQuery = $db->prepare('SELECT * FROM expenses WHERE user_id = :logged_user_id');
+  $loggedUserExpensesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $loggedUserExpensesDataQuery->execute();
+
+  $expensesData = $loggedUserExpensesDataQuery->fetch();
+
+  //możliwe że trzeba bedzie ten blok kodu przenieśc to strony z bilansem
+  
+
+
+} else {
+  header("Location: index.php");
+  exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Check balance</title>
+    <title>User page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
@@ -15,7 +52,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
-    
   </head>
   <body>
     <header>
@@ -32,13 +68,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div
-          class="navbar-collapse-custom-background collapse navbar-collapse justify-content-md-center custom-position"
+          class="collapse navbar-collapse justify-content-md-center custom-position"
           id="navbarsExample08"
         >
           <ul class="navbar-nav custom-width">
             <li class="nav-item active custom-layout-logo">
               <img class="logo" src="./assets/pie-chart-logo.svg" alt="Logo" />
-              <a class="nav-link custom-font-logo" href="./userpage.html"
+              <a class="nav-link custom-font-logo" href="./userpage.php"
                 >spy <br />budget</span> </a
               >
             </li>
@@ -64,56 +100,37 @@
               <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Check balance</a>
             </li>
             <li class="nav-item nav-item-custom-postion">
+              <img id="track-expenses" class="nav-icon" src="./assets/calculator.svg" alt="Track expenses" />
+              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Track expenses</a>
+            </li>
+            <li class="nav-item nav-item-custom-postion">
               <img id="settings" class="nav-icon" src="./assets/gear.svg" alt="Settings" />
               <a class="nav-link custom-font nav-name-settings" href="./settings.html" hidden>Settings</a>
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="log-out" class="nav-icon" src="./assets/box-arrow-right.svg" alt="Log out" />
-              <a class="nav-link custom-font nav-name-log-out" href="./index.html" hidden>Log out</a>
+              <a class="nav-link custom-font nav-name-log-out" href="./index.php" hidden>Log out</a>
             </li>
           </ul>
         </div>
       </nav>
     </header>
-    <main class="check-balance-page">
-      <div class="check-balance-main-container">
-        <div class="period-for-data">
-          <span>Select desired period for data</span>
-          <select id="time-period" name="date">
-            <option value="current month">Current month</option>
-            <option value="previous month">Previous month</option>
-            <option value="current year">Current year</option>
-            <option value="custom date">Custom date</option>
-          </select>
-        </div>
 
-        <div class="incomes-expenses-charts">
-          <div class="incomes-charts">
-            <div class="chart-name">Incomes</div>
-            <div class="chart">
-              <canvas id="incomeDoughnutChart" class="incomes-doughnut-chart"></canvas>
-            </div>
-            <div class="chart-sum-value">6200 pln</div>
-          </div>
-          <div class="expenses-charts">
-            <div class="chart-name">Expenses</div>
-            <div class="chart">
-              <canvas id="expensesDoughnutChart" class="expenses-doughnut-chart"></canvas>
-            </div>
-            <div class="chart-sum-value">3400 pln</div>
-          </div>
-          </div>
-          <div class="bilans-chart">
-            <canvas id="bilansLineChart" class="bilans-line-chart"></canvas>
-          </div>
-        </div>
-      </div>
+    <main class="user-page">
+
+    <?php 
+    echo 'Uzytkownik '.$logged_user_name.'. Hello!';
+    
+    ?>
+
     </main>
+
     <footer class="footer mt-auto py-3 footer-custom-font">
       <div class="container">
         <span class="text-muted">Spy Budget 2024</span>
       </div>
     </footer>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -122,8 +139,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./index.js"></script>
 
+    <script src="./index.js"></script>
   </body>
 </html>

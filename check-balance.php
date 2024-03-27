@@ -1,9 +1,43 @@
+<?php
+
+session_start();
+require_once "database.php";
+
+//pobierz dane użytkownika o danej sesyjnej
+
+if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
+
+  $logged_user_id = $_SESSION['logged_id'];
+  $logged_user_name = $_SESSION['logged_name'];
+
+  $loggedUserIncomesDataQuery = $db->prepare('SELECT * FROM incomes WHERE user_id = :logged_user_id');
+  $loggedUserIncomesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $loggedUserIncomesDataQuery->execute();
+
+  $incomesData = $loggedUserIncomesDataQuery->fetch();
+
+  $loggedUserExpensesDataQuery = $db->prepare('SELECT * FROM expenses WHERE user_id = :logged_user_id');
+  $loggedUserExpensesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $loggedUserExpensesDataQuery->execute();
+
+  $expensesData = $loggedUserExpensesDataQuery->fetch();
+
+  //możliwe że trzeba bedzie ten blok kodu przenieśc to strony z bilansem
+  
+
+
+} else {
+  header("Location: index.php");
+  exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add income</title>
+    <title>Check balance</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
@@ -15,6 +49,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
+    
   </head>
   <body>
     <header>
@@ -31,7 +66,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div
-          class="collapse navbar-collapse justify-content-md-center custom-position"
+          class="navbar-collapse-custom-background collapse navbar-collapse justify-content-md-center custom-position"
           id="navbarsExample08"
         >
           <ul class="navbar-nav custom-width">
@@ -74,65 +109,36 @@
         </div>
       </nav>
     </header>
-    <main>
-      <div class="transaction-form">
-        <h2>Add income</h2>
-        <div class="input-form">
-          <div class="form-amount-date">
-            <div class="form-input">
-              <span>Amount</span>
-              <div class="amount-input-currency"><input class="amount-input" type="text" />
-                <span class="currency">pln</span></div>
+    <main class="check-balance-page">
+      <div class="check-balance-main-container">
+        <div class="period-for-data">
+          <span>Select desired period for data</span>
+          <select id="time-period" name="date">
+            <option value="current month">Current month</option>
+            <option value="previous month">Previous month</option>
+            <option value="current year">Current year</option>
+            <option value="custom date">Custom date</option>
+          </select>
+        </div>
+
+        <div class="incomes-expenses-charts">
+          <div class="incomes-charts">
+            <div class="chart-name">Incomes</div>
+            <div class="chart">
+              <canvas id="incomeDoughnutChart" class="incomes-doughnut-chart"></canvas>
             </div>
-            <div class="form-input">
-              <span>Date</span>
-              <input class="date-input" type="date" id="start" name="trip-start" value="" min="" max="" />
-              
-            </div>
+            <div class="chart-sum-value">6200 pln</div>
           </div>
-          
-          <fieldset class="form-input category">
-            <legend>Pick category</legend>
-
-            <div class="radio-row">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="salary" id="salary" checked>
-                <label class="form-check-label" for="salary">
-                  Salary
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="investments" id="investments">
-                <label class="form-check-label" for="investments">
-                  Investments
-                </label>
-              </div>
+          <div class="expenses-charts">
+            <div class="chart-name">Expenses</div>
+            <div class="chart">
+              <canvas id="expensesDoughnutChart" class="expenses-doughnut-chart"></canvas>
             </div>
-
-            <div class="radio-row">
-            
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="bank-interest" id="bank-interest">
-                  <label class="form-check-label" for="bank-interest">
-                    Bank interest
-                  </label>
-                </div>
-
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="sales" id="sales">
-                  <label class="form-check-label" for="sales">
-                    Sales
-                  </label>
-                </div>
-            </div>
-          </fieldset>
-          <div class="form-input-note">
-            <span>Note</span>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <div class="chart-sum-value">3400 pln</div>
           </div>
-          <div class="form-button-action">
-            <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
-            <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button>Done</button></div>
+          </div>
+          <div class="bilans-chart">
+            <canvas id="bilansLineChart" class="bilans-line-chart"></canvas>
           </div>
         </div>
       </div>
@@ -150,7 +156,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./index.js"></script>
-    <script src="./setCalendar.js"></script>
+
   </body>
 </html>

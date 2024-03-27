@@ -49,25 +49,30 @@ require_once 'database.php';
         <div class="right-side">
           <div class="box">
             <div class="log-in">
-            <h2 class="log-in-title">Log in</h2>
-            <div class="input-table">
-              <div class="input-field">
-                <span class="input-name">E-mail address</span>
-                <input type="text" />
-              </div>
-              <div class="input-field">
-                <span class="input-name">Password</span>
-                <input type="text" />
-              </div>
+              <h2 class="log-in-title">Log in</h2>
+              <form action="./login.php" method="post" class="input-table">
+                <div class="input-field">
+                  <span class="input-name">E-mail address</span>
+                  <input type="text" name="email-login" value="<?php if(isset($_SESSION['remember_email-login'])){
+                  echo $_SESSION['remember_email-login'];
+                  unset($_SESSION['remember_email-login']);
+                } ?>"/>
+                  <?php if(isset($_SESSION['e_email-login'])){
+                  echo '<span class="input-name" style="color:#FF5E00;margin-top:5px;font-size:0.65rem">'.$_SESSION['e_email-login'].'</span>';
+                  unset($_SESSION['e_email-login']);
+                } ?>
+                </div>
+                <div class="input-field">
+                  <span class="input-name">Password</span>
+                  <input type="text" name="password-login"/>
+                </div>
+                <button class="log-in-button button-form" type="submit">Log in</button>
+              </form>
             </div>
+          </div>
 
-            <form action="./login.php" method="post"></form>
-            <a class="button-form" href="./userpage.html"><button class="log-in-button">Log in</button></a>
-          </div>
-          </div>
           <div class="box">
-
-          <div class="sign-up">
+            <div class="sign-up">
             <h2 class="sign-up-title">Sign up</h2>
 
             <form action="./registered.php" method="post" class="input-table">
@@ -107,8 +112,8 @@ require_once 'database.php';
               </div>
               <button class="sign-up-button" type="submit">Register</button>
             </form>
-
-          </div>
+            </div>
+            </div>
           </div>
         </div>
       </div>

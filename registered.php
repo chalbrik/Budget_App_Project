@@ -25,10 +25,6 @@ if(isset($_POST['email'])){
 
         $validation_check = false;
         $_SESSION['e_email'] = "Insert correct email address!";
-
-        //$_SESSION["given-email"] = $_POST['email'];
-        //header("Location: index.php");
-        //exit();
     }
 
     // 3. Sprawdź poprawność hasła
