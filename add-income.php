@@ -23,7 +23,14 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   $expensesData = $loggedUserExpensesDataQuery->fetch();
 
   //tutuj trzeba bedzie pobrac dane z tableli katoegorie żeby wyswietlac wszyskti kategorie
-  
+
+  //pobierz kategorie danego usera
+
+  $incomesCategoriesDisplayQuery = $db->prepare("SELECT income_category_assigned_to_user_id, income_category_name FROM incomes_category_assigned_to_users WHERE user_id = :logged_user_id");
+  $incomesCategoriesDisplayQuery->bindValue(":logged_user_id", $logged_user_id, PDO::PARAM_INT);
+  $incomesCategoriesDisplayQuery->execute();
+
+  $incomesCategories = $incomesCategoriesDisplayQuery->fetchAll();
 
 
 } else {
@@ -88,7 +95,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
                 >Add</a
               >
               <div class="dropdown-menu dropdown-menu-custom-bg-color dropdown-menu-custom-position custom-font" aria-labelledby="dropdown08">
-                <a class="dropdown-item custom-font" href="./add-income.html">Add income</a>
+                <a class="dropdown-item custom-font" href="./add-income.php">Add income</a>
                 <a class="dropdown-item custom-font" href="./add-expense.html">Add expense</a>
               </div>
             </li>
@@ -102,7 +109,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="log-out" class="nav-icon" src="./assets/box-arrow-right.svg" alt="Log out" />
-              <a class="nav-link custom-font nav-name-log-out" href="./index.html" hidden>Log out</a>
+              <a class="nav-link custom-font nav-name-log-out" href="./index.php" hidden>Log out</a>
             </li>
           </ul>
         </div>
@@ -111,67 +118,53 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
     <main>
       <div class="transaction-form">
         <h2>Add income</h2>
-        <form class="input-form" action="add-to-database.php" method="post"></form>
-          <div class="form-amount-date">
-            <div class="form-input">
-              <span>Amount</span>
-              <div class="amount-input-currency"><input class="amount-input" type="text" name="amount"/>
-                <span class="currency">pln</span></div>
-            </div>
-            <div class="form-input">
-              <span>Date</span>
-              <input class="date-input" type="date" id="start" name="trip-start" value="" min="" max="" />
-              
-            </div>
-          </div>
-          
-          <fieldset class="form-input category">
-            <legend>Pick category</legend>
-
-            <div class="radio-row">
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="salary" id="salary" checked>
-                <label class="form-check-label" for="salary">
-                  Salary
-                </label>
+          <form class="input-form" action="add-to-database.php" method="post">
+            <div class="form-amount-date">
+              <div class="form-input">
+                <span>Amount</span>
+                <div class="amount-input-currency"><input class="amount-input" type="text" name="amount"/>
+                  <span class="currency">pln</span></div>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="investments" id="investments">
-                <label class="form-check-label" for="investments">
-                  Investments
-                </label>
+              <div class="form-input">
+                <span>Date</span>
+                <input class="date-input" type="date" id="start" name="transaction-date" value="" min="" max="" />
+                
               </div>
             </div>
-
-            <div class="radio-row">
             
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="bank-interest" id="bank-interest">
-                  <label class="form-check-label" for="bank-interest">
-                    Bank interest
-                  </label>
-                </div>
+            <fieldset class="form-input category">
+              <legend>Pick category</legend>
 
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="sales" id="sales">
-                  <label class="form-check-label" for="sales">
-                    Sales
-                  </label>
-                </div>
+              <div class="radio-row">
+
+                <?php 
+
+                foreach($incomesCategories as $incomeCategory){
+
+                  echo '<div class="form-check">';
+                  echo '<input type="radio" id="'.$incomeCategory['income_category_name'].'" name="transaction-category" value="'.$incomeCategory['income_category_assigned_to_user_id'].' class="form-check-input"">';
+                  echo '<label for="'.$incomeCategory['income_category_name'].' class="form-check-label"">'.$incomeCategory['income_category_name'].'</label>';
+                  echo '</div>';
+
+                }
+                
+                ?>
+              </div>
+
+            </fieldset>
+
+            <div class="form-input-note">
+              <span>Note</span>
+              <textarea class="form-control" name="note" aria-label="With textarea"></textarea>
             </div>
-          </fieldset>
-          <div class="form-input-note">
-            <span>Note</span>
-            <textarea class="form-control" name="note" aria-label="With textarea"></textarea>
-          </div>
-          <div class="form-button-action">
-            <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
-            <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button type="submit">Done</button></div>
-          </div>
-        </form>
-
-
+            <div class="form-button-action">
+              <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
+              <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button type="submit">Done</button></div>
+            </div>
+          </form>
       </div>
+
+
     </main>
     <footer class="footer mt-auto py-3 footer-custom-font">
       <div class="container">

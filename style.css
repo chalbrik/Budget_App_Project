@@ -560,6 +560,8 @@ fieldset.category {
     font-weight: 300;
     font-style: normal;
     font-size: 1.3rem;
+
+    margin: 10px 0 10px 0;
 }
 
 fieldset.category legend {

@@ -91,7 +91,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
                 >Add</a
               >
               <div class="dropdown-menu dropdown-menu-custom-bg-color dropdown-menu-custom-position custom-font" aria-labelledby="dropdown08">
-                <a class="dropdown-item custom-font" href="./add-income.html">Add income</a>
+                <a class="dropdown-item custom-font" href="./add-income.php">Add income</a>
                 <a class="dropdown-item custom-font" href="./add-expense.html">Add expense</a>
               </div>
             </li>
