@@ -554,14 +554,15 @@ span.currency {
 }
 
 fieldset.category {
-    width: 100%;
+    /* width: 100%;
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-    font-size: 1.3rem;
+    font-size: 1.3rem; */
 
     margin: 10px 0 10px 0;
+    color: blue;
 }
 
 fieldset.category legend {
