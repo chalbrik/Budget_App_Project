@@ -22,7 +22,7 @@ const incomesCtx = document.getElementById("incomeDoughnutChart");
 new Chart(incomesCtx, {
   type: "doughnut",
   data: {
-    labels: ["Salary", "Bank interest", "Sales", "Investments", "Other"],
+    labels: incomesLabels,
     datasets: [
       {
         label: "Incomes",

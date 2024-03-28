@@ -88,7 +88,7 @@ if(isset($_POST['email'])){
      $insertDefaultCategoriesQuery->bindValue(':userId', $queryDataUserId, PDO::PARAM_INT);
      $insertDefaultCategoriesQuery->execute();
 
-    header("Location: registered.html");
+    header("Location: registered.php");
     exit();
 
     } else {

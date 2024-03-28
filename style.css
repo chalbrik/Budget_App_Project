@@ -554,15 +554,14 @@ span.currency {
 }
 
 fieldset.category {
-    /* width: 100%;
+    width: 100%;
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
-    font-size: 1.3rem; */
+    font-size: 1.3rem;
 
     margin: 10px 0 10px 0;
-    color: blue;
 }
 
 fieldset.category legend {
@@ -592,19 +591,31 @@ fieldset.category legend {
 
 .form-check {
 
-    width: 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 0 0 0 0 !important;
+    margin: 0 50px 5px 0 !important;
+}
+
+.form-check-input{
+    margin: 0 0 0 0 !important;
+}
+
+.form-check > label {
+
+   margin-left: 10px;
 }
 
 
 .radio-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content:flex-start;
     align-items: center;
-}
-
-.radio-row>div {
-    margin: 0 30px 0 10px;
 }
 
 .form-button-action {

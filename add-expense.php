@@ -1,3 +1,24 @@
+<?php 
+session_start();
+require_once "database.php";
+
+if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
+  $logged_user_id = $_SESSION['logged_id'];
+  $logged_user_name = $_SESSION['logged_name'];
+
+  $expensesCategoriesDisplayQuery = $db->prepare("SELECT expense_category_assigned_to_user_id, expense_category_name FROM expenses_category_assigned_to_users WHERE user_id = :logged_user_id");
+  $expensesCategoriesDisplayQuery->bindValue(":logged_user_id", $logged_user_id, PDO::PARAM_INT);
+  $expensesCategoriesDisplayQuery->execute();
+
+  $expensesCategories = $expensesCategoriesDisplayQuery->fetchAll();
+
+
+} else {
+  header("Location: index.php");
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +58,7 @@
         <ul class="navbar-nav custom-width">
           <li class="nav-item active custom-layout-logo">
             <img class="logo" src="./assets/pie-chart-logo.svg" alt="Logo" />
-            <a class="nav-link custom-font-logo" href="./userpage.html"
+            <a class="nav-link custom-font-logo" href="./userpage.php"
               >spy <br />budget</span> </a
             >
           </li>
@@ -55,12 +76,12 @@
             >
             <div class="dropdown-menu dropdown-menu-custom-bg-color dropdown-menu-custom-position custom-font" aria-labelledby="dropdown08">
               <a class="dropdown-item custom-font" href="./add-income.php">Add income</a>
-              <a class="dropdown-item custom-font" href="./add-expense.html">Add expense</a>
+              <a class="dropdown-item custom-font" href="./add-expense.php">Add expense</a>
             </div>
           </li>
           <li class="nav-item nav-item-custom-postion">
             <img id="check-balance" class="nav-icon" src="./assets/graph-up-arrow.svg" alt="Check balance" />
-            <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Check balance</a>
+            <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.php" hidden>Check balance</a>
           </li>
           <li class="nav-item nav-item-custom-postion">
             <img id="settings" class="nav-icon" src="./assets/gear.svg" alt="Settings" />
@@ -68,7 +89,7 @@
           </li>
           <li class="nav-item nav-item-custom-postion">
             <img id="log-out" class="nav-icon" src="./assets/box-arrow-right.svg" alt="Log out" />
-            <a class="nav-link custom-font nav-name-log-out" href="./index.php" hidden>Log out</a>
+            <a class="nav-link custom-font nav-name-log-out" href="./log-out.php" hidden>Log out</a>
           </li>
         </ul>
       </div>
@@ -89,79 +110,23 @@
                 <input class="date-input" type="date" id="start" name="trip-start" value="" min="" max="" />
               </div>
             </div>
-            
-            <fieldset class="form-input category">
-              <legend>Pick category</legend>
-  
-              <div class="radio-row">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="food" id="food" checked>
-                  <label class="form-check-label" for="food">
-                    Food
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="apartmment" id="apartmment">
-                  <label class="form-check-label" for="apartmment">
-                    Apartmment
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="hygine" id="hygine">
-                  <label class="form-check-label" for="hygine">
-                    Hygine
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="savings" id="savings">
-                  <label class="form-check-label" for="savings">
-                    Savings
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="training" id="training">
-                  <label class="form-check-label" for="training">
-                    Training
-                  </label>
-                </div>
-              </div>
-  
-              <div class="radio-row">
-                
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="media" id="media">
-                    <label class="form-check-label" for="media">
-                      Media
-                    </label>
-                  </div>
-  
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="healthcare" id="healthcare">
-                    <label class="form-check-label" for="healthcare">
-                      Healthcare
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="entertainment" id="entertainment">
-                    <label class="form-check-label" for="entertainment">
-                      Entertainment
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="trips" id="trips">
-                    <label class="form-check-label" for="trips">
-                      Trips
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="debt" id="debt">
-                    <label class="form-check-label" for="debt">
-                      Debt
-                    </label>
-                  </div>
-                  </div>
 
+            <fieldset class="form-input category">
+              <legend>Pick category:</legend>
+
+              <div class="radio-row">
+                <?php 
+                foreach($expensesCategories as $expenseCategory){
+
+                  echo '<div class="form-check">';
+                  echo '<input type="radio" id="'.$expenseCategory['expense_category_name'].'" name="transaction-category" value="'.$expenseCategory['expense_category_assigned_to_user_id'].'" class="form-check-input">';
+                  echo '<label for="'.$expenseCategory['expense_category_name'].'" class="form-check-label">'.$expenseCategory['expense_category_name'].'</label>';
+                  echo '</div>';
+                }
+                ?>
+              </div>
             </fieldset>
+
             <div class="form-input-note">
               <span>Note</span>
               <textarea class="form-control" aria-label="With textarea"></textarea>

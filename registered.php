@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+unset($_SESSION['remember_username']);
+unset($_SESSION['remember_email']);
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

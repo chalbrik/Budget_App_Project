@@ -10,20 +10,54 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   $logged_user_id = $_SESSION['logged_id'];
   $logged_user_name = $_SESSION['logged_name'];
 
-  $loggedUserIncomesDataQuery = $db->prepare('SELECT * FROM incomes WHERE user_id = :logged_user_id');
-  $loggedUserIncomesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
-  $loggedUserIncomesDataQuery->execute();
+  // $loggedUserIncomesDataQuery = $db->prepare('SELECT * FROM incomes WHERE user_id = :logged_user_id');
+  // $loggedUserIncomesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  // $loggedUserIncomesDataQuery->execute();
 
-  $incomesData = $loggedUserIncomesDataQuery->fetch();
+  // $incomesData = $loggedUserIncomesDataQuery->fetchAll();
 
-  $loggedUserExpensesDataQuery = $db->prepare('SELECT * FROM expenses WHERE user_id = :logged_user_id');
-  $loggedUserExpensesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
-  $loggedUserExpensesDataQuery->execute();
+  // $loggedUserExpensesDataQuery = $db->prepare('SELECT * FROM expenses WHERE user_id = :logged_user_id');
+  // $loggedUserExpensesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  // $loggedUserExpensesDataQuery->execute();
 
-  $expensesData = $loggedUserExpensesDataQuery->fetch();
+  // $expensesData = $loggedUserExpensesDataQuery->fetchAll();
 
-  //możliwe że trzeba bedzie ten blok kodu przenieśc to strony z bilansem
-  
+
+
+  // foreach($incomesData as $incomeData){
+  //   echo $incomeData['income_category_assigned_to_user_id	'].'<br />';
+  // }
+
+  //trzeba zdefiniowac globalną zmienną ale najpierw trzeba poukładać dane według tego czym są incomesData to są wszystkie dane w tabeli incomes
+  //potrzebuje nazw kategorii
+  //z tego co widzę labale są jedne a potem jest suma, wiec musze tutaj napisać kwerendę która tworzy mi fikcyjna tabelę w której mam sume wszystkiehc wydatków
+  // oraz przychodów
+
+  //kwerenda do stworzenia tabeli pobierającej wszystkie kategorie i ich warotść
+
+  $overallIncomesQuery = $db->prepare('SELECT
+                                      incomes_category_assigned_to_users.income_category_name,
+                                      incomes.user_id,
+                                      SUM(incomes.income_amount) AS overall_income
+                                      FROM
+                                      incomes_category_assigned_to_users
+                                      INNER JOIN
+                                      incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
+                                      WHERE
+                                      incomes.user_id = :logged_user_id
+                                      GROUP BY incomes_category_assigned_to_users.income_category_name
+                                      ORDER BY overall_income DESC');
+  $overallIncomesQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $overallIncomesQuery->execute();
+
+  $overallIncomesData = $overallIncomesQuery->fetchAll();
+
+  $incomesLabels = [];
+
+  foreach($overallIncomesData as $overallIncomeData){
+    $incomesLabels[] = $overallIncomeData['income_category_name'];
+  }
+
 
 
 } else {
@@ -72,7 +106,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
           <ul class="navbar-nav custom-width">
             <li class="nav-item active custom-layout-logo">
               <img class="logo" src="./assets/pie-chart-logo.svg" alt="Logo" />
-              <a class="nav-link custom-font-logo" href="./userpage.html"
+              <a class="nav-link custom-font-logo" href="./userpage.php"
                 >spy <br />budget</span> </a
               >
             </li>
@@ -90,12 +124,12 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
               >
               <div class="dropdown-menu dropdown-menu-custom-bg-color dropdown-menu-custom-position custom-font" aria-labelledby="dropdown08">
                 <a class="dropdown-item custom-font" href="./add-income.php">Add income</a>
-                <a class="dropdown-item custom-font" href="./add-expense.html">Add expense</a>
+                <a class="dropdown-item custom-font" href="./add-expense.php">Add expense</a>
               </div>
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="check-balance" class="nav-icon" src="./assets/graph-up-arrow.svg" alt="Check balance" />
-              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Check balance</a>
+              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.php" hidden>Check balance</a>
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="settings" class="nav-icon" src="./assets/gear.svg" alt="Settings" />
@@ -103,7 +137,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="log-out" class="nav-icon" src="./assets/box-arrow-right.svg" alt="Log out" />
-              <a class="nav-link custom-font nav-name-log-out" href="./index.php" hidden>Log out</a>
+              <a class="nav-link custom-font nav-name-log-out" href="./log-out.php" hidden>Log out</a>
             </li>
           </ul>
         </div>
@@ -157,6 +191,11 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      //tworze zmienną globalną dla nazw kategorii moich wykresów
+      var incomesLabels = <?php json_encode($incomesLabels); ?>
+
+    </script>
     <script src="./index.js"></script>
 
   </body>

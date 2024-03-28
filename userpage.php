@@ -3,27 +3,11 @@
 session_start();
 require_once "database.php";
 
-//pobierz dane użytkownika o danej sesyjnej
 
 if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
 
   $logged_user_id = $_SESSION['logged_id'];
   $logged_user_name = $_SESSION['logged_name'];
-
-  $loggedUserIncomesDataQuery = $db->prepare('SELECT * FROM incomes WHERE user_id = :logged_user_id');
-  $loggedUserIncomesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
-  $loggedUserIncomesDataQuery->execute();
-
-  $incomesData = $loggedUserIncomesDataQuery->fetch();
-
-  $loggedUserExpensesDataQuery = $db->prepare('SELECT * FROM expenses WHERE user_id = :logged_user_id');
-  $loggedUserExpensesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
-  $loggedUserExpensesDataQuery->execute();
-
-  $expensesData = $loggedUserExpensesDataQuery->fetch();
-
-  //możliwe że trzeba bedzie ten blok kodu przenieśc to strony z bilansem
-  
 
 
 } else {
@@ -92,16 +76,16 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
               >
               <div class="dropdown-menu dropdown-menu-custom-bg-color dropdown-menu-custom-position custom-font" aria-labelledby="dropdown08">
                 <a class="dropdown-item custom-font" href="./add-income.php">Add income</a>
-                <a class="dropdown-item custom-font" href="./add-expense.html">Add expense</a>
+                <a class="dropdown-item custom-font" href="./add-expense.php">Add expense</a>
               </div>
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="check-balance" class="nav-icon" src="./assets/graph-up-arrow.svg" alt="Check balance" />
-              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Check balance</a>
+              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.php" hidden>Check balance</a>
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="track-expenses" class="nav-icon" src="./assets/calculator.svg" alt="Track expenses" />
-              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.html" hidden>Track expenses</a>
+              <a class="nav-link custom-font nav-link-check-balance nav-name-check-balance" href="./check-balance.php" hidden>Track expenses</a>
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="settings" class="nav-icon" src="./assets/gear.svg" alt="Settings" />
@@ -109,7 +93,7 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
             </li>
             <li class="nav-item nav-item-custom-postion">
               <img id="log-out" class="nav-icon" src="./assets/box-arrow-right.svg" alt="Log out" />
-              <a class="nav-link custom-font nav-name-log-out" href="./index.php" hidden>Log out</a>
+              <a class="nav-link custom-font nav-name-log-out" href="./log-out.php" hidden>Log out</a>
             </li>
           </ul>
         </div>
