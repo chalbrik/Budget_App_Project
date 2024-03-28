@@ -220,6 +220,8 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
       var incomesValues = <?php echo json_encode($incomesVlues); ?>;
       var expensesLabels = <?php echo json_encode($expensesLabels); ?>;
       var expensesValues = <?php echo json_encode($expensesVlues); ?>;
+      console.log(expensesLabels);
+      console.log(expensesValues);
     </script>
     <script src="./index.js"></script>
 
