@@ -10,31 +10,8 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   $logged_user_id = $_SESSION['logged_id'];
   $logged_user_name = $_SESSION['logged_name'];
 
-  // $loggedUserIncomesDataQuery = $db->prepare('SELECT * FROM incomes WHERE user_id = :logged_user_id');
-  // $loggedUserIncomesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
-  // $loggedUserIncomesDataQuery->execute();
-
-  // $incomesData = $loggedUserIncomesDataQuery->fetchAll();
-
-  // $loggedUserExpensesDataQuery = $db->prepare('SELECT * FROM expenses WHERE user_id = :logged_user_id');
-  // $loggedUserExpensesDataQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
-  // $loggedUserExpensesDataQuery->execute();
-
-  // $expensesData = $loggedUserExpensesDataQuery->fetchAll();
-
-
-
-  // foreach($incomesData as $incomeData){
-  //   echo $incomeData['income_category_assigned_to_user_id	'].'<br />';
-  // }
-
-  //trzeba zdefiniowac globalną zmienną ale najpierw trzeba poukładać dane według tego czym są incomesData to są wszystkie dane w tabeli incomes
-  //potrzebuje nazw kategorii
-  //z tego co widzę labale są jedne a potem jest suma, wiec musze tutaj napisać kwerendę która tworzy mi fikcyjna tabelę w której mam sume wszystkiehc wydatków
-  // oraz przychodów
-
+  // ----Incomes----
   //kwerenda do stworzenia tabeli pobierającej wszystkie kategorie i ich warotść
-
   $overallIncomesQuery = $db->prepare('SELECT
                                       incomes_category_assigned_to_users.income_category_name,
                                       incomes.user_id,
@@ -53,13 +30,59 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   $overallIncomesData = $overallIncomesQuery->fetchAll();
 
   $incomesLabels = [];
+  $incomesVlues = [];
 
   foreach($overallIncomesData as $overallIncomeData){
     $incomesLabels[] = $overallIncomeData['income_category_name'];
+    $incomesVlues[] = $overallIncomeData['overall_income'];
   }
 
+  //pobieranie sumy wszystkich wartości z bazy danych
+  $allIncomesAmountQuery = $db->prepare('SELECT SUM(income_amount) AS all_incomes_amount FROM incomes WHERE user_id = :logged_user_id');
+  $allIncomesAmountQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $allIncomesAmountQuery->execute();
 
+  $allIncomesAmount = $allIncomesAmountQuery->fetch();
 
+  $incomesAmount = $allIncomesAmount['all_incomes_amount'];
+
+  // ----Expenses----
+  //kwerenda do stworzenia tabeli pobierającej wszystkie kategorie i ich warotść
+  $overallExpensesQuery = $db->prepare('SELECT
+                                      expenses_category_assigned_to_users.expense_category_name,
+                                      expenses.user_id,
+                                      SUM(expenses.expense_amount) AS overall_expense
+                                      FROM
+                                      expenses_category_assigned_to_users
+                                      INNER JOIN
+                                      expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.expense_category_assigned_to_user_id
+                                      WHERE
+                                      expenses.user_id = :logged_user_id
+                                      GROUP BY expenses_category_assigned_to_users.expense_category_name
+                                      ORDER BY overall_expense DESC');
+  $overallExpensesQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $overallExpensesQuery->execute();
+
+  $overallExpensesData = $overallExpensesQuery->fetchAll();
+
+  $expensesLabels = [];
+  $expensesVlues = [];
+
+  foreach($overallExpensesData as $overallExpenseData){
+    $expensesLabels[] = $overallExpenseData['expense_category_name'];
+    $expensesVlues[] = $overallExpenseData['overall_expense'];
+  }
+
+  //pobieranie sumy wszystkich wartości z bazy danych
+  $allExpensesAmountQuery = $db->prepare('SELECT SUM(expense_amount) AS all_expenses_amount FROM expenses WHERE user_id = :logged_user_id');
+  $allExpensesAmountQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  $allExpensesAmountQuery->execute();
+
+  $allExpensesAmount = $allExpensesAmountQuery->fetch();
+
+  $expensesAmount = $allExpensesAmount['all_expenses_amount'];
+
+ 
 } else {
   header("Location: index.php");
   exit();
@@ -161,14 +184,14 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
             <div class="chart">
               <canvas id="incomeDoughnutChart" class="incomes-doughnut-chart"></canvas>
             </div>
-            <div class="chart-sum-value">6200 pln</div>
+            <div class="chart-sum-value">Total: <?php echo $incomesAmount ?> pln</div>
           </div>
           <div class="expenses-charts">
             <div class="chart-name">Expenses</div>
             <div class="chart">
               <canvas id="expensesDoughnutChart" class="expenses-doughnut-chart"></canvas>
             </div>
-            <div class="chart-sum-value">3400 pln</div>
+            <div class="chart-sum-value">Total: <?php echo $expensesAmount ?> pln</div>
           </div>
           </div>
           <div class="bilans-chart">
@@ -193,8 +216,10 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       //tworze zmienną globalną dla nazw kategorii moich wykresów
-      var incomesLabels = <?php json_encode($incomesLabels); ?>
-
+      var incomesLabels = <?php echo json_encode($incomesLabels); ?>;
+      var incomesValues = <?php echo json_encode($incomesVlues); ?>;
+      var expensesLabels = <?php echo json_encode($expensesLabels); ?>;
+      var expensesValues = <?php echo json_encode($expensesVlues); ?>;
     </script>
     <script src="./index.js"></script>
 

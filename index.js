@@ -26,7 +26,7 @@ new Chart(incomesCtx, {
     datasets: [
       {
         label: "Incomes",
-        data: [4200, 580, 310, 308, 97],
+        data: incomesValues,
         backgroundColor: [
           "rgb(255, 99, 132)",
           "rgb(54, 162, 235)",
@@ -59,22 +59,11 @@ const expensesCtx = document.getElementById("expensesDoughnutChart");
 new Chart(expensesCtx, {
   type: "doughnut",
   data: {
-    labels: [
-      "Food",
-      "Apartment",
-      "Transport",
-      "Media",
-      "Healthcare",
-      "Hygiene",
-      "Entertainment",
-      "Trips",
-      "Training",
-      "Debt",
-    ],
+    labels: expensesLabels,
     datasets: [
       {
         label: "Expenses",
-        data: [2250, 1340, 570, 402, 143, 130, 60, 54, 42, 23],
+        data: expensesValues,
         backgroundColor: [
           "rgb(255, 99, 132)",
           "rgb(54, 162, 235)",
