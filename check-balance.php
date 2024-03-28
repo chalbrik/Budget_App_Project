@@ -10,8 +10,6 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   $logged_user_id = $_SESSION['logged_id'];
   $logged_user_name = $_SESSION['logged_name'];
 
-  $currentYear = date("Y");
-
   // "all-history" selected>All history</option>
   //             <option value="current-month">Current month</option>
   //             <option value="previous-month">Previous month</option>
@@ -20,9 +18,25 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   //trzeba stworzyć zmienne start date i end date w zależności od tego jaki teraz
   if(isset($_POST['date'])){
     $selectedTimeFrame = $_POST['date'];
-
-    if($selectedTimeFrame == "all-history"){
-      $sqlQueryIncomePhrase = 
+  
+    $sqlQueryIncomePhrase = 
+      'SELECT
+      incomes_category_assigned_to_users.income_category_name,
+      incomes.user_id,
+      SUM(incomes.income_amount) AS overall_income
+      FROM
+      incomes_category_assigned_to_users
+      INNER JOIN
+      incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
+      WHERE
+      incomes.user_id = :logged_user_id AND
+      incomes.income_date BETWEEN :start_date AND :end_date
+      GROUP BY incomes_category_assigned_to_users.income_category_name
+      ORDER BY overall_income DESC';
+  
+    switch($selectedTimeFrame){
+      case 'all-history':
+        $sqlQueryIncomePhrase = 
         'SELECT
         incomes_category_assigned_to_users.income_category_name,
         incomes.user_id,
@@ -35,25 +49,6 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
         incomes.user_id = :logged_user_id
         GROUP BY incomes_category_assigned_to_users.income_category_name
         ORDER BY overall_income DESC';
-    } else {
-      $sqlQueryIncomePhrase = 
-        'SELECT
-        incomes_category_assigned_to_users.income_category_name,
-        incomes.user_id,
-        SUM(incomes.income_amount) AS overall_income
-        FROM
-        incomes_category_assigned_to_users
-        INNER JOIN
-        incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
-        WHERE
-        incomes.user_id = :logged_user_id AND
-        incomes.income_date BETWEEN :start_date AND :end_date
-        GROUP BY incomes_category_assigned_to_users.income_category_name
-        ORDER BY overall_income DESC';
-    }
-
-    switch($selectedTimeFrame){
-      case 'all-history':
        
       break;
 
@@ -61,8 +56,9 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
         //oblicz date dla obecnego miesiąca
 
         $currentMonth = date("m");
+        $currentYear = date("Y");
 
-        // $firstDayOfMonth = date("Y-m-01");
+        $firstDayOfMonth = date("Y-m-01");
 
         $lastDayOfMonth = date('Y-m-t', strtotime("$currentYear-$currentMonth-01"));
   
@@ -74,31 +70,45 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
 
       case 'previous-month':
         //oblicz date dla obecnego miesiąca
-        
+        $previousMonth = date("m", strtotime("-1 month"));
+        $currentYear = date("Y");
+        $previousYear = date("Y", strtotime("-1 month"));
+       
+        $firstDayOfMonth = date("Y-m-01", strtotime("-1 month"));
+
+        if($previousMonth == '12'){
+          $lastDayOfMonth = date('Y-m-t', strtotime("$previousYear-$previousMonth-01"));
+        } else {
+          $lastDayOfMonth = date('Y-m-t', strtotime("$currentYear-$previousMonth-01"));
+        }
       break;
 
     }
 
+  } else {
+    $sqlQueryIncomePhrase = 
+    'SELECT
+    incomes_category_assigned_to_users.income_category_name,
+    incomes.user_id,
+    SUM(incomes.income_amount) AS overall_income
+    FROM
+    incomes_category_assigned_to_users
+    INNER JOIN
+    incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
+    WHERE
+    incomes.user_id = :logged_user_id
+    GROUP BY incomes_category_assigned_to_users.income_category_name
+    ORDER BY overall_income DESC';
   }
-
-  $sqlQueryIncomePhrase = 
-  'SELECT
-  incomes_category_assigned_to_users.income_category_name,
-  incomes.user_id,
-  SUM(incomes.income_amount) AS overall_income
-  FROM
-  incomes_category_assigned_to_users
-  INNER JOIN
-  incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
-  WHERE
-  incomes.user_id = :logged_user_id
-  GROUP BY incomes_category_assigned_to_users.income_category_name
-  ORDER BY overall_income DESC';
 
   // ----Incomes----
   //kwerenda do stworzenia tabeli pobierającej wszystkie kategorie i ich warotść
   $overallIncomesQuery = $db->prepare($sqlQueryIncomePhrase);
   $overallIncomesQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
+  if(isset($_POST['date'])){
+    $overallIncomesQuery->bindValue(':start_date', $firstDayOfMonth, PDO::PARAM_INT);
+    $overallIncomesQuery->bindValue(':end_date', $lastDayOfMonth, PDO::PARAM_INT);
+  }
   $overallIncomesQuery->execute();
 
   $overallIncomesData = $overallIncomesQuery->fetchAll();
@@ -254,7 +264,12 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
               <!-- <option value="custom-date">Custom date</option> -->
             </select>
           </form>
-          <?php if(isset($_POST['date'])){ echo $selectedTimeFrame.'<br />'; echo $lastDayOfMonth;} ?>
+          <?php if(isset($_POST['date'])){ 
+          echo $selectedTimeFrame.'<br />';
+          echo $previousYear.'<br />'; 
+          echo $firstDayOfMonth.'<br />'; 
+          echo $lastDayOfMonth;
+          unset($_POST['date']);} ?>
        
 
         <div class="incomes-expenses-charts">
