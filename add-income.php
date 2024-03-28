@@ -104,7 +104,8 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
     <main>
       <div class="transaction-form">
         <h2>Add income</h2>
-          <form class="input-form" action="add-to-database.php" method="post">
+          <form class="input-form" action="add-income-to-database.php" method="post">
+            
             <div class="form-amount-date">
               <div class="form-input">
                 <span>Amount</span>
@@ -138,13 +139,14 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
               <span>Note</span>
               <textarea class="form-control" name="note" aria-label="With textarea"></textarea>
             </div>
+
             <div class="form-button-action">
-              <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
+              <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><a href="./userpage.php"><button>Cancel</button></a></div>
               <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button type="submit">Done</button></div>
             </div>
+
           </form>
       </div>
-
 
     </main>
     <footer class="footer mt-auto py-3 footer-custom-font">

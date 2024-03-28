@@ -16,6 +16,10 @@ document.querySelectorAll(".nav-item").forEach((navItem) => {
   });
 });
 
+function submitForm() {
+  document.getElementById('time-frame-form').submit();
+}
+
 //doughnut - incomes
 const incomesCtx = document.getElementById("incomeDoughnutChart");
 

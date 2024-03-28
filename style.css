@@ -667,7 +667,7 @@ fieldset.category legend {
     margin: 5px 5px 5px 5px;
 }
 
-.period-for-data>span {
+.period-for-data>label {
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
@@ -687,6 +687,32 @@ fieldset.category legend {
     text-decoration: none;
     color: black;
 }
+
+/* .time-frame-submit-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 60px;
+    background: none;
+    border: none;
+    fill: rgb(0, 0, 0, 0.);
+
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    
+}
+
+.time-frame-submit-button > svg{
+    height: 70%;
+}
+
+.time-frame-submit-button > svg:hover{
+    fill: #1675F2;
+    cursor: pointer;
+    to był styl dla guzika ale potem to wykorzystam do add income expense żeby podświetlać guziczek
+} */
 
 .incomes-expenses-charts {
     width: 100%;

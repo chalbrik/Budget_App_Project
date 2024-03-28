@@ -98,44 +98,46 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
       <main>
         <div class="transaction-form">
           <h2>Add expense</h2>
-          <div class="input-form">
-            <div class="form-amount-date">
-              <div class="form-input">
-                <span>Amount</span>
-                <div class="amount-input-currency"><input class="amount-input" type="text" />
-                  <span class="currency">pln</span></div>
+            <form class="input-form" action="add-expense-to-database.php" method="post">
+            
+              <div class="form-amount-date">
+                <div class="form-input">
+                  <span>Amount</span>
+                  <div class="amount-input-currency"><input class="amount-input" type="text" name="amount"/>
+                    <span class="currency">pln</span></div>
+                </div>
+                <div class="form-input">
+                  <span>Date</span>
+                  <input class="date-input" type="date" id="start" name="transaction-date" value="" min="" max="" />
+                </div>
               </div>
-              <div class="form-input">
-                <span>Date</span>
-                <input class="date-input" type="date" id="start" name="trip-start" value="" min="" max="" />
+
+              <fieldset class="form-input category">
+                <legend>Pick category:</legend>
+
+                <div class="radio-row">
+                  <?php 
+                  foreach($expensesCategories as $expenseCategory){
+
+                    echo '<div class="form-check">';
+                    echo '<input type="radio" id="'.$expenseCategory['expense_category_name'].'" name="transaction-category" value="'.$expenseCategory['expense_category_assigned_to_user_id'].'" class="form-check-input">';
+                    echo '<label for="'.$expenseCategory['expense_category_name'].'" class="form-check-label">'.$expenseCategory['expense_category_name'].'</label>';
+                    echo '</div>';
+                  }
+                  ?>
+                </div>
+              </fieldset>
+
+              <div class="form-input-note">
+                <span>Note</span>
+                <textarea class="form-control" name="note" aria-label="With textarea"></textarea>
               </div>
-            </div>
-
-            <fieldset class="form-input category">
-              <legend>Pick category:</legend>
-
-              <div class="radio-row">
-                <?php 
-                foreach($expensesCategories as $expenseCategory){
-
-                  echo '<div class="form-check">';
-                  echo '<input type="radio" id="'.$expenseCategory['expense_category_name'].'" name="transaction-category" value="'.$expenseCategory['expense_category_assigned_to_user_id'].'" class="form-check-input">';
-                  echo '<label for="'.$expenseCategory['expense_category_name'].'" class="form-check-label">'.$expenseCategory['expense_category_name'].'</label>';
-                  echo '</div>';
-                }
-                ?>
+              <div class="form-button-action">
+                <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><a href="./userpage.php"><button>Cancel</button></a></div>
+                <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button type="submit">Done</button></div>
               </div>
-            </fieldset>
-
-            <div class="form-input-note">
-              <span>Note</span>
-              <textarea class="form-control" aria-label="With textarea"></textarea>
-            </div>
-            <div class="form-button-action">
-              <div class="cancel-button button-action"><img src="./assets/x-lg.svg" alt="Cancel"><button>Cancel</button></div>
-              <div class="done-button button-action"><img src="./assets/check-lg.svg" alt="Done"><button>Done</button></div>
-            </div>
-          </div>
+            
+            </form>
         </div>
       </main>
       <footer class="footer mt-auto py-3 footer-custom-font">

@@ -10,20 +10,94 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
   $logged_user_id = $_SESSION['logged_id'];
   $logged_user_name = $_SESSION['logged_name'];
 
+  $currentYear = date("Y");
+
+  // "all-history" selected>All history</option>
+  //             <option value="current-month">Current month</option>
+  //             <option value="previous-month">Previous month</option>
+  //             <option value="current-year"
+
+  //trzeba stworzyć zmienne start date i end date w zależności od tego jaki teraz
+  if(isset($_POST['date'])){
+    $selectedTimeFrame = $_POST['date'];
+
+    if($selectedTimeFrame == "all-history"){
+      $sqlQueryIncomePhrase = 
+        'SELECT
+        incomes_category_assigned_to_users.income_category_name,
+        incomes.user_id,
+        SUM(incomes.income_amount) AS overall_income
+        FROM
+        incomes_category_assigned_to_users
+        INNER JOIN
+        incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
+        WHERE
+        incomes.user_id = :logged_user_id
+        GROUP BY incomes_category_assigned_to_users.income_category_name
+        ORDER BY overall_income DESC';
+    } else {
+      $sqlQueryIncomePhrase = 
+        'SELECT
+        incomes_category_assigned_to_users.income_category_name,
+        incomes.user_id,
+        SUM(incomes.income_amount) AS overall_income
+        FROM
+        incomes_category_assigned_to_users
+        INNER JOIN
+        incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
+        WHERE
+        incomes.user_id = :logged_user_id AND
+        incomes.income_date BETWEEN :start_date AND :end_date
+        GROUP BY incomes_category_assigned_to_users.income_category_name
+        ORDER BY overall_income DESC';
+    }
+
+    switch($selectedTimeFrame){
+      case 'all-history':
+       
+      break;
+
+      case 'current-month':
+        //oblicz date dla obecnego miesiąca
+
+        $currentMonth = date("m");
+
+        // $firstDayOfMonth = date("Y-m-01");
+
+        $lastDayOfMonth = date('Y-m-t', strtotime("$currentYear-$currentMonth-01"));
+  
+
+        $startDate = '';
+        $endDate = '';
+        
+      break;
+
+      case 'previous-month':
+        //oblicz date dla obecnego miesiąca
+        
+      break;
+
+    }
+
+  }
+
+  $sqlQueryIncomePhrase = 
+  'SELECT
+  incomes_category_assigned_to_users.income_category_name,
+  incomes.user_id,
+  SUM(incomes.income_amount) AS overall_income
+  FROM
+  incomes_category_assigned_to_users
+  INNER JOIN
+  incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
+  WHERE
+  incomes.user_id = :logged_user_id
+  GROUP BY incomes_category_assigned_to_users.income_category_name
+  ORDER BY overall_income DESC';
+
   // ----Incomes----
   //kwerenda do stworzenia tabeli pobierającej wszystkie kategorie i ich warotść
-  $overallIncomesQuery = $db->prepare('SELECT
-                                      incomes_category_assigned_to_users.income_category_name,
-                                      incomes.user_id,
-                                      SUM(incomes.income_amount) AS overall_income
-                                      FROM
-                                      incomes_category_assigned_to_users
-                                      INNER JOIN
-                                      incomes ON incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.income_category_assigned_to_user_id
-                                      WHERE
-                                      incomes.user_id = :logged_user_id
-                                      GROUP BY incomes_category_assigned_to_users.income_category_name
-                                      ORDER BY overall_income DESC');
+  $overallIncomesQuery = $db->prepare($sqlQueryIncomePhrase);
   $overallIncomesQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
   $overallIncomesQuery->execute();
 
@@ -48,18 +122,19 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
 
   // ----Expenses----
   //kwerenda do stworzenia tabeli pobierającej wszystkie kategorie i ich warotść
-  $overallExpensesQuery = $db->prepare('SELECT
-                                      expenses_category_assigned_to_users.expense_category_name,
-                                      expenses.user_id,
-                                      SUM(expenses.expense_amount) AS overall_expense
-                                      FROM
-                                      expenses_category_assigned_to_users
-                                      INNER JOIN
-                                      expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.expense_category_assigned_to_user_id
-                                      WHERE
-                                      expenses.user_id = :logged_user_id
-                                      GROUP BY expenses_category_assigned_to_users.expense_category_name
-                                      ORDER BY overall_expense DESC');
+  $overallExpensesQuery = $db->prepare(
+    'SELECT
+    expenses_category_assigned_to_users.expense_category_name,
+    expenses.user_id,
+    SUM(expenses.expense_amount) AS overall_expense
+    FROM
+    expenses_category_assigned_to_users
+    INNER JOIN
+    expenses ON expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.expense_category_assigned_to_user_id
+    WHERE
+    expenses.user_id = :logged_user_id
+    GROUP BY expenses_category_assigned_to_users.expense_category_name
+    ORDER BY overall_expense DESC');
   $overallExpensesQuery->bindValue(':logged_user_id', $logged_user_id, PDO::PARAM_INT);
   $overallExpensesQuery->execute();
 
@@ -168,15 +243,19 @@ if(isset($_SESSION['logged_id']) && isset($_SESSION['logged_name'])){
     </header>
     <main class="check-balance-page">
       <div class="check-balance-main-container">
-        <div class="period-for-data">
-          <span>Select desired period for data</span>
-          <select id="time-period" name="date">
-            <option value="current month">Current month</option>
-            <option value="previous month">Previous month</option>
-            <option value="current year">Current year</option>
-            <option value="custom date">Custom date</option>
-          </select>
-        </div>
+        
+        <form id="time-frame-form" class="period-for-data" action="./check-balance.php" method="post">
+          <label for="time-period">Select desired period for data</label>
+            <select id="time-period" name="date" onchange="submitForm()">
+              <option value="all-history">All history</option>
+              <option value="current-month">Current month</option>
+              <option value="previous-month">Previous month</option>
+              <!-- <option value="current-year">Current year</option> -->
+              <!-- <option value="custom-date">Custom date</option> -->
+            </select>
+          </form>
+          <?php if(isset($_POST['date'])){ echo $selectedTimeFrame.'<br />'; echo $lastDayOfMonth;} ?>
+       
 
         <div class="incomes-expenses-charts">
           <div class="incomes-charts">

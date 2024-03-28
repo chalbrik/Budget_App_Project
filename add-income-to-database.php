@@ -11,12 +11,6 @@ require_once "database.php";
     $note = $_POST['note'];
     $userId = $_SESSION['logged_id'];
 
-    echo $userId.'<br />';
-    echo $amount.'<br />';
-    echo $date.'<br />';
-    echo $category.'<br />';
-    echo $note.'<br />';
-
     //query który wstawia dane do tabeli
 
     $inputIncomeQuery = $db->prepare("INSERT INTO incomes VALUES(NULL, :income_amount, :income_date, :income_category_assigned_to_user_id, :income_note, :user_id)");
@@ -31,7 +25,5 @@ require_once "database.php";
    header("Location: index.php");
    exit();
  }
-
-
 
 ?>
